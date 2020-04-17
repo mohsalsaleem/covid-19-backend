@@ -55,6 +55,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     private boolean activated = false;
 
+    @Field("age")
+    private Integer age;
+
     @Size(min = 10)
     @Field("phone")
     private String phone;
@@ -195,6 +198,14 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
     @Override

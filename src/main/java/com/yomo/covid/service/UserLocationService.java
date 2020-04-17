@@ -42,4 +42,6 @@ public interface UserLocationService {
      * @param id the id of the entity.
      */
     void delete(String id);
+
+    Page<UserLocationDTO> findByUserId(String userId, Pageable pageable);
 }

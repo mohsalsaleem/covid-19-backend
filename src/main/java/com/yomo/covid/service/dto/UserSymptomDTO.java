@@ -1,5 +1,6 @@
 package com.yomo.covid.service.dto;
 
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -10,8 +11,10 @@ public class UserSymptomDTO implements Serializable {
     
     private String id;
 
+    @NotNull
     private String userId;
 
+    @NotNull
     private String symptom;
 
     

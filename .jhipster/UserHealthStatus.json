@@ -3,12 +3,18 @@
     "fields": [
         {
             "fieldName": "userId",
-            "fieldType": "String"
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "severity",
             "fieldType": "UserHealthSeverity",
-            "fieldValues": "NONE,LOW,MEDIUM,HIGH"
+            "fieldValues": "NONE,LOW,MEDIUM,HIGH",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "relationships": [],

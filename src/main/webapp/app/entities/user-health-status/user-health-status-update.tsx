@@ -79,7 +79,14 @@ export const UserHealthStatusUpdate = (props: IUserHealthStatusUpdateProps) => {
                 <Label id="userIdLabel" for="user-health-status-userId">
                   <Translate contentKey="covid19App.userHealthStatus.userId">User Id</Translate>
                 </Label>
-                <AvField id="user-health-status-userId" type="text" name="userId" />
+                <AvField
+                  id="user-health-status-userId"
+                  type="text"
+                  name="userId"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') }
+                  }}
+                />
               </AvGroup>
               <AvGroup>
                 <Label id="severityLabel" for="user-health-status-severity">

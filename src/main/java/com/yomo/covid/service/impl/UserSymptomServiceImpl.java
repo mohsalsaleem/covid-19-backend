@@ -81,4 +81,9 @@ public class UserSymptomServiceImpl implements UserSymptomService {
         log.debug("Request to delete UserSymptom : {}", id);
         userSymptomRepository.deleteById(id);
     }
+
+    @Override
+    public Page<UserSymptomDTO> findByUserId(String userId, Pageable pageable) {
+        return userSymptomRepository.findByUserId(userId, pageable).map(userSymptomMapper::toDto);
+    }
 }

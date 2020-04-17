@@ -81,4 +81,9 @@ public class UserHealthStatusServiceImpl implements UserHealthStatusService {
         log.debug("Request to delete UserHealthStatus : {}", id);
         userHealthStatusRepository.deleteById(id);
     }
+
+    @Override
+    public Page<UserHealthStatusDTO> findByUserId(String userId, Pageable pageable) {
+        return userHealthStatusRepository.findByUserId(userId, pageable).map(userHealthStatusMapper::toDto);
+    }
 }

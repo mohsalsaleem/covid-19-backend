@@ -3,6 +3,7 @@ package com.yomo.covid.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -11,16 +12,18 @@ import java.util.Objects;
  * A UserCurrentLocation.
  */
 @Document(collection = "user_current_location")
-public class UserCurrentLocation extends AbstractAuditingEntity implements Serializable {
+public class UserCurrentLocation implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     private String id;
 
+    @NotNull
     @Field("user_id")
     private String userId;
 
+    @NotNull
     @Field("location_id")
     private String locationId;
 

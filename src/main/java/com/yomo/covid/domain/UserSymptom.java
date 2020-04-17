@@ -3,6 +3,7 @@ package com.yomo.covid.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -11,16 +12,18 @@ import java.util.Objects;
  * A UserSymptom.
  */
 @Document(collection = "user_symptom")
-public class UserSymptom extends AbstractAuditingEntity implements Serializable {
+public class UserSymptom implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     private String id;
 
+    @NotNull
     @Field("user_id")
     private String userId;
 
+    @NotNull
     @Field("symptom")
     private String symptom;
 

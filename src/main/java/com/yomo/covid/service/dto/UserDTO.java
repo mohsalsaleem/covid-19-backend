@@ -38,6 +38,8 @@ public class UserDTO {
     @Size(max = 256)
     private String imageUrl;
 
+    private Integer age;
+
     private boolean activated = false;
 
     @Size(min = 2, max = 10)
@@ -66,6 +68,7 @@ public class UserDTO {
         this.phone = user.getPhone();
         this.activated = user.getActivated();
         this.imageUrl = user.getImageUrl();
+        this.age = user.getAge();
         this.langKey = user.getLangKey();
         this.createdBy = user.getCreatedBy();
         this.createdDate = user.getCreatedDate();
@@ -186,6 +189,14 @@ public class UserDTO {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
     @Override

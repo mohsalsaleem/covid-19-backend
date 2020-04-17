@@ -67,8 +67,6 @@ public class UserLocationResourceIT {
     public static UserLocation createEntity() {
         UserLocation userLocation = new UserLocation()
             .userId(DEFAULT_USER_ID)
-            .latitude(DEFAULT_LATITUDE)
-            .longitude(DEFAULT_LONGITUDE)
             .locationName(DEFAULT_LOCATION_NAME);
         return userLocation;
     }
@@ -81,8 +79,6 @@ public class UserLocationResourceIT {
     public static UserLocation createUpdatedEntity() {
         UserLocation userLocation = new UserLocation()
             .userId(UPDATED_USER_ID)
-            .latitude(UPDATED_LATITUDE)
-            .longitude(UPDATED_LONGITUDE)
             .locationName(UPDATED_LOCATION_NAME);
         return userLocation;
     }
@@ -109,8 +105,6 @@ public class UserLocationResourceIT {
         assertThat(userLocationList).hasSize(databaseSizeBeforeCreate + 1);
         UserLocation testUserLocation = userLocationList.get(userLocationList.size() - 1);
         assertThat(testUserLocation.getUserId()).isEqualTo(DEFAULT_USER_ID);
-        assertThat(testUserLocation.getLatitude()).isEqualTo(DEFAULT_LATITUDE);
-        assertThat(testUserLocation.getLongitude()).isEqualTo(DEFAULT_LONGITUDE);
         assertThat(testUserLocation.getLocationName()).isEqualTo(DEFAULT_LOCATION_NAME);
     }
 
@@ -135,6 +129,76 @@ public class UserLocationResourceIT {
 
 
     @Test
+    public void checkUserIdIsRequired() throws Exception {
+        int databaseSizeBeforeTest = userLocationRepository.findAll().size();
+        // set the field null
+        userLocation.setUserId(null);
+
+        // Create the UserLocation, which fails.
+        UserLocationDTO userLocationDTO = userLocationMapper.toDto(userLocation);
+
+        restUserLocationMockMvc.perform(post("/api/user-locations")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(userLocationDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<UserLocation> userLocationList = userLocationRepository.findAll();
+        assertThat(userLocationList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    public void checkLatitudeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = userLocationRepository.findAll().size();
+        // set the field null
+
+        // Create the UserLocation, which fails.
+        UserLocationDTO userLocationDTO = userLocationMapper.toDto(userLocation);
+
+        restUserLocationMockMvc.perform(post("/api/user-locations")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(userLocationDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<UserLocation> userLocationList = userLocationRepository.findAll();
+        assertThat(userLocationList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    public void checkLongitudeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = userLocationRepository.findAll().size();
+        // set the field null
+
+        // Create the UserLocation, which fails.
+        UserLocationDTO userLocationDTO = userLocationMapper.toDto(userLocation);
+
+        restUserLocationMockMvc.perform(post("/api/user-locations")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(userLocationDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<UserLocation> userLocationList = userLocationRepository.findAll();
+        assertThat(userLocationList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    public void checkLocationNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = userLocationRepository.findAll().size();
+        // set the field null
+        userLocation.setLocationName(null);
+
+        // Create the UserLocation, which fails.
+        UserLocationDTO userLocationDTO = userLocationMapper.toDto(userLocation);
+
+        restUserLocationMockMvc.perform(post("/api/user-locations")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(userLocationDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<UserLocation> userLocationList = userLocationRepository.findAll();
+        assertThat(userLocationList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
     public void getAllUserLocations() throws Exception {
         // Initialize the database
         userLocationRepository.save(userLocation);
@@ -149,7 +213,7 @@ public class UserLocationResourceIT {
             .andExpect(jsonPath("$.[*].longitude").value(hasItem(DEFAULT_LONGITUDE.intValue())))
             .andExpect(jsonPath("$.[*].locationName").value(hasItem(DEFAULT_LOCATION_NAME)));
     }
-    
+
     @Test
     public void getUserLocation() throws Exception {
         // Initialize the database
@@ -184,8 +248,6 @@ public class UserLocationResourceIT {
         UserLocation updatedUserLocation = userLocationRepository.findById(userLocation.getId()).get();
         updatedUserLocation
             .userId(UPDATED_USER_ID)
-            .latitude(UPDATED_LATITUDE)
-            .longitude(UPDATED_LONGITUDE)
             .locationName(UPDATED_LOCATION_NAME);
         UserLocationDTO userLocationDTO = userLocationMapper.toDto(updatedUserLocation);
 
@@ -199,8 +261,6 @@ public class UserLocationResourceIT {
         assertThat(userLocationList).hasSize(databaseSizeBeforeUpdate);
         UserLocation testUserLocation = userLocationList.get(userLocationList.size() - 1);
         assertThat(testUserLocation.getUserId()).isEqualTo(UPDATED_USER_ID);
-        assertThat(testUserLocation.getLatitude()).isEqualTo(UPDATED_LATITUDE);
-        assertThat(testUserLocation.getLongitude()).isEqualTo(UPDATED_LONGITUDE);
         assertThat(testUserLocation.getLocationName()).isEqualTo(UPDATED_LOCATION_NAME);
     }
 

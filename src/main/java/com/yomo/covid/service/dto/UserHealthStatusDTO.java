@@ -1,5 +1,6 @@
 package com.yomo.covid.service.dto;
 
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 import com.yomo.covid.domain.enumeration.UserHealthSeverity;
@@ -11,8 +12,10 @@ public class UserHealthStatusDTO implements Serializable {
     
     private String id;
 
+    @NotNull
     private String userId;
 
+    @NotNull
     private UserHealthSeverity severity;
 
     

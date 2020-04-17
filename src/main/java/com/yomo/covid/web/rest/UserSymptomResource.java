@@ -18,6 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -51,7 +52,7 @@ public class UserSymptomResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/user-symptoms")
-    public ResponseEntity<UserSymptomDTO> createUserSymptom(@RequestBody UserSymptomDTO userSymptomDTO) throws URISyntaxException {
+    public ResponseEntity<UserSymptomDTO> createUserSymptom(@Valid @RequestBody UserSymptomDTO userSymptomDTO) throws URISyntaxException {
         log.debug("REST request to save UserSymptom : {}", userSymptomDTO);
         if (userSymptomDTO.getId() != null) {
             throw new BadRequestAlertException("A new userSymptom cannot already have an ID", ENTITY_NAME, "idexists");
@@ -72,7 +73,7 @@ public class UserSymptomResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/user-symptoms")
-    public ResponseEntity<UserSymptomDTO> updateUserSymptom(@RequestBody UserSymptomDTO userSymptomDTO) throws URISyntaxException {
+    public ResponseEntity<UserSymptomDTO> updateUserSymptom(@Valid @RequestBody UserSymptomDTO userSymptomDTO) throws URISyntaxException {
         log.debug("REST request to update UserSymptom : {}", userSymptomDTO);
         if (userSymptomDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
@@ -93,6 +94,14 @@ public class UserSymptomResource {
     public ResponseEntity<List<UserSymptomDTO>> getAllUserSymptoms(Pageable pageable) {
         log.debug("REST request to get a page of UserSymptoms");
         Page<UserSymptomDTO> page = userSymptomService.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    @GetMapping("/user-symptoms/user/{userId}")
+    public ResponseEntity<List<UserSymptomDTO>> getUserSymptomsByUserId(@RequestParam String userId, Pageable pageable) {
+        log.debug("REST request to get a page of UserSymptoms");
+        Page<UserSymptomDTO> page = userSymptomService.findByUserId(userId, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

@@ -79,13 +79,27 @@ export const UserCurrentLocationUpdate = (props: IUserCurrentLocationUpdateProps
                 <Label id="userIdLabel" for="user-current-location-userId">
                   <Translate contentKey="covid19App.userCurrentLocation.userId">User Id</Translate>
                 </Label>
-                <AvField id="user-current-location-userId" type="text" name="userId" />
+                <AvField
+                  id="user-current-location-userId"
+                  type="text"
+                  name="userId"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') }
+                  }}
+                />
               </AvGroup>
               <AvGroup>
                 <Label id="locationIdLabel" for="user-current-location-locationId">
                   <Translate contentKey="covid19App.userCurrentLocation.locationId">Location Id</Translate>
                 </Label>
-                <AvField id="user-current-location-locationId" type="text" name="locationId" />
+                <AvField
+                  id="user-current-location-locationId"
+                  type="text"
+                  name="locationId"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') }
+                  }}
+                />
               </AvGroup>
               <Button tag={Link} id="cancel-save" to="/user-current-location" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />

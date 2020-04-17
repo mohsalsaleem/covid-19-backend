@@ -73,8 +73,6 @@ public class UserTravelHistoryResourceIT {
         UserTravelHistory userTravelHistory = new UserTravelHistory()
             .userId(DEFAULT_USER_ID)
             .locationName(DEFAULT_LOCATION_NAME)
-            .latitude(DEFAULT_LATITUDE)
-            .longitude(DEFAULT_LONGITUDE)
             .dateAndTimeOfTravel(DEFAULT_DATE_AND_TIME_OF_TRAVEL);
         return userTravelHistory;
     }
@@ -88,8 +86,6 @@ public class UserTravelHistoryResourceIT {
         UserTravelHistory userTravelHistory = new UserTravelHistory()
             .userId(UPDATED_USER_ID)
             .locationName(UPDATED_LOCATION_NAME)
-            .latitude(UPDATED_LATITUDE)
-            .longitude(UPDATED_LONGITUDE)
             .dateAndTimeOfTravel(UPDATED_DATE_AND_TIME_OF_TRAVEL);
         return userTravelHistory;
     }
@@ -117,8 +113,6 @@ public class UserTravelHistoryResourceIT {
         UserTravelHistory testUserTravelHistory = userTravelHistoryList.get(userTravelHistoryList.size() - 1);
         assertThat(testUserTravelHistory.getUserId()).isEqualTo(DEFAULT_USER_ID);
         assertThat(testUserTravelHistory.getLocationName()).isEqualTo(DEFAULT_LOCATION_NAME);
-        assertThat(testUserTravelHistory.getLatitude()).isEqualTo(DEFAULT_LATITUDE);
-        assertThat(testUserTravelHistory.getLongitude()).isEqualTo(DEFAULT_LONGITUDE);
         assertThat(testUserTravelHistory.getDateAndTimeOfTravel()).isEqualTo(DEFAULT_DATE_AND_TIME_OF_TRAVEL);
     }
 
@@ -143,6 +137,94 @@ public class UserTravelHistoryResourceIT {
 
 
     @Test
+    public void checkUserIdIsRequired() throws Exception {
+        int databaseSizeBeforeTest = userTravelHistoryRepository.findAll().size();
+        // set the field null
+        userTravelHistory.setUserId(null);
+
+        // Create the UserTravelHistory, which fails.
+        UserTravelHistoryDTO userTravelHistoryDTO = userTravelHistoryMapper.toDto(userTravelHistory);
+
+        restUserTravelHistoryMockMvc.perform(post("/api/user-travel-histories")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(userTravelHistoryDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<UserTravelHistory> userTravelHistoryList = userTravelHistoryRepository.findAll();
+        assertThat(userTravelHistoryList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    public void checkLocationNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = userTravelHistoryRepository.findAll().size();
+        // set the field null
+        userTravelHistory.setLocationName(null);
+
+        // Create the UserTravelHistory, which fails.
+        UserTravelHistoryDTO userTravelHistoryDTO = userTravelHistoryMapper.toDto(userTravelHistory);
+
+        restUserTravelHistoryMockMvc.perform(post("/api/user-travel-histories")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(userTravelHistoryDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<UserTravelHistory> userTravelHistoryList = userTravelHistoryRepository.findAll();
+        assertThat(userTravelHistoryList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    public void checkLatitudeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = userTravelHistoryRepository.findAll().size();
+        // set the field null
+
+        // Create the UserTravelHistory, which fails.
+        UserTravelHistoryDTO userTravelHistoryDTO = userTravelHistoryMapper.toDto(userTravelHistory);
+
+        restUserTravelHistoryMockMvc.perform(post("/api/user-travel-histories")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(userTravelHistoryDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<UserTravelHistory> userTravelHistoryList = userTravelHistoryRepository.findAll();
+        assertThat(userTravelHistoryList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    public void checkLongitudeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = userTravelHistoryRepository.findAll().size();
+        // set the field null
+
+        // Create the UserTravelHistory, which fails.
+        UserTravelHistoryDTO userTravelHistoryDTO = userTravelHistoryMapper.toDto(userTravelHistory);
+
+        restUserTravelHistoryMockMvc.perform(post("/api/user-travel-histories")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(userTravelHistoryDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<UserTravelHistory> userTravelHistoryList = userTravelHistoryRepository.findAll();
+        assertThat(userTravelHistoryList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    public void checkDateAndTimeOfTravelIsRequired() throws Exception {
+        int databaseSizeBeforeTest = userTravelHistoryRepository.findAll().size();
+        // set the field null
+        userTravelHistory.setDateAndTimeOfTravel(null);
+
+        // Create the UserTravelHistory, which fails.
+        UserTravelHistoryDTO userTravelHistoryDTO = userTravelHistoryMapper.toDto(userTravelHistory);
+
+        restUserTravelHistoryMockMvc.perform(post("/api/user-travel-histories")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(userTravelHistoryDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<UserTravelHistory> userTravelHistoryList = userTravelHistoryRepository.findAll();
+        assertThat(userTravelHistoryList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
     public void getAllUserTravelHistories() throws Exception {
         // Initialize the database
         userTravelHistoryRepository.save(userTravelHistory);
@@ -158,7 +240,7 @@ public class UserTravelHistoryResourceIT {
             .andExpect(jsonPath("$.[*].longitude").value(hasItem(DEFAULT_LONGITUDE.intValue())))
             .andExpect(jsonPath("$.[*].dateAndTimeOfTravel").value(hasItem(DEFAULT_DATE_AND_TIME_OF_TRAVEL.toString())));
     }
-    
+
     @Test
     public void getUserTravelHistory() throws Exception {
         // Initialize the database
@@ -195,8 +277,6 @@ public class UserTravelHistoryResourceIT {
         updatedUserTravelHistory
             .userId(UPDATED_USER_ID)
             .locationName(UPDATED_LOCATION_NAME)
-            .latitude(UPDATED_LATITUDE)
-            .longitude(UPDATED_LONGITUDE)
             .dateAndTimeOfTravel(UPDATED_DATE_AND_TIME_OF_TRAVEL);
         UserTravelHistoryDTO userTravelHistoryDTO = userTravelHistoryMapper.toDto(updatedUserTravelHistory);
 
@@ -211,8 +291,6 @@ public class UserTravelHistoryResourceIT {
         UserTravelHistory testUserTravelHistory = userTravelHistoryList.get(userTravelHistoryList.size() - 1);
         assertThat(testUserTravelHistory.getUserId()).isEqualTo(UPDATED_USER_ID);
         assertThat(testUserTravelHistory.getLocationName()).isEqualTo(UPDATED_LOCATION_NAME);
-        assertThat(testUserTravelHistory.getLatitude()).isEqualTo(UPDATED_LATITUDE);
-        assertThat(testUserTravelHistory.getLongitude()).isEqualTo(UPDATED_LONGITUDE);
         assertThat(testUserTravelHistory.getDateAndTimeOfTravel()).isEqualTo(UPDATED_DATE_AND_TIME_OF_TRAVEL);
     }
 

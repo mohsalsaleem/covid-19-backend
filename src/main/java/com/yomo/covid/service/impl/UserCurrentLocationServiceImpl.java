@@ -81,4 +81,9 @@ public class UserCurrentLocationServiceImpl implements UserCurrentLocationServic
         log.debug("Request to delete UserCurrentLocation : {}", id);
         userCurrentLocationRepository.deleteById(id);
     }
+
+    @Override
+    public Page<UserCurrentLocationDTO> findByUserId(String userId, Pageable pageable) {
+        return userCurrentLocationRepository.findByUserId(userId, pageable).map(userCurrentLocationMapper::toDto);
+    }
 }

@@ -1,5 +1,6 @@
 package com.yomo.covid.service;
 
+import com.yomo.covid.domain.UserSymptom;
 import com.yomo.covid.service.dto.UserSymptomDTO;
 
 import org.springframework.data.domain.Page;
@@ -42,4 +43,6 @@ public interface UserSymptomService {
      * @param id the id of the entity.
      */
     void delete(String id);
+
+    Page<UserSymptomDTO> findByUserId(String userId, Pageable pageable);
 }

@@ -1,5 +1,6 @@
 package com.yomo.covid.service.dto;
 
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -7,18 +8,20 @@ import java.util.Objects;
  * A DTO for the {@link com.yomo.covid.domain.UserLocation} entity.
  */
 public class UserLocationDTO implements Serializable {
-    
+
     private String id;
 
+    @NotNull
     private String userId;
 
     private Long latitude;
 
     private Long longitude;
 
+    @NotNull
     private String locationName;
 
-    
+
     public String getId() {
         return id;
     }

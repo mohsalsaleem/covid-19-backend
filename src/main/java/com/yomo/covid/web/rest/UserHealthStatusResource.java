@@ -18,6 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -51,7 +52,7 @@ public class UserHealthStatusResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/user-health-statuses")
-    public ResponseEntity<UserHealthStatusDTO> createUserHealthStatus(@RequestBody UserHealthStatusDTO userHealthStatusDTO) throws URISyntaxException {
+    public ResponseEntity<UserHealthStatusDTO> createUserHealthStatus(@Valid @RequestBody UserHealthStatusDTO userHealthStatusDTO) throws URISyntaxException {
         log.debug("REST request to save UserHealthStatus : {}", userHealthStatusDTO);
         if (userHealthStatusDTO.getId() != null) {
             throw new BadRequestAlertException("A new userHealthStatus cannot already have an ID", ENTITY_NAME, "idexists");
@@ -72,7 +73,7 @@ public class UserHealthStatusResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/user-health-statuses")
-    public ResponseEntity<UserHealthStatusDTO> updateUserHealthStatus(@RequestBody UserHealthStatusDTO userHealthStatusDTO) throws URISyntaxException {
+    public ResponseEntity<UserHealthStatusDTO> updateUserHealthStatus(@Valid @RequestBody UserHealthStatusDTO userHealthStatusDTO) throws URISyntaxException {
         log.debug("REST request to update UserHealthStatus : {}", userHealthStatusDTO);
         if (userHealthStatusDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
@@ -93,6 +94,14 @@ public class UserHealthStatusResource {
     public ResponseEntity<List<UserHealthStatusDTO>> getAllUserHealthStatuses(Pageable pageable) {
         log.debug("REST request to get a page of UserHealthStatuses");
         Page<UserHealthStatusDTO> page = userHealthStatusService.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    @GetMapping("/user-health-statuses/user/{userId}")
+    public ResponseEntity<List<UserHealthStatusDTO>> getUserHealthStatusesByUserId(String userId, Pageable pageable) {
+        log.debug("REST request to get a page of UserHealthStatuses");
+        Page<UserHealthStatusDTO> page = userHealthStatusService.findByUserId(userId, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

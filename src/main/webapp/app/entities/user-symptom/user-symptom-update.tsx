@@ -79,13 +79,27 @@ export const UserSymptomUpdate = (props: IUserSymptomUpdateProps) => {
                 <Label id="userIdLabel" for="user-symptom-userId">
                   <Translate contentKey="covid19App.userSymptom.userId">User Id</Translate>
                 </Label>
-                <AvField id="user-symptom-userId" type="text" name="userId" />
+                <AvField
+                  id="user-symptom-userId"
+                  type="text"
+                  name="userId"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') }
+                  }}
+                />
               </AvGroup>
               <AvGroup>
                 <Label id="symptomLabel" for="user-symptom-symptom">
                   <Translate contentKey="covid19App.userSymptom.symptom">Symptom</Translate>
                 </Label>
-                <AvField id="user-symptom-symptom" type="text" name="symptom" />
+                <AvField
+                  id="user-symptom-symptom"
+                  type="text"
+                  name="symptom"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') }
+                  }}
+                />
               </AvGroup>
               <Button tag={Link} id="cancel-save" to="/user-symptom" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />

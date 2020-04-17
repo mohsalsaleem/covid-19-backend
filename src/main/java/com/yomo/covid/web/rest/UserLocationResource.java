@@ -18,6 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -51,7 +52,7 @@ public class UserLocationResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/user-locations")
-    public ResponseEntity<UserLocationDTO> createUserLocation(@RequestBody UserLocationDTO userLocationDTO) throws URISyntaxException {
+    public ResponseEntity<UserLocationDTO> createUserLocation(@Valid @RequestBody UserLocationDTO userLocationDTO) throws URISyntaxException {
         log.debug("REST request to save UserLocation : {}", userLocationDTO);
         if (userLocationDTO.getId() != null) {
             throw new BadRequestAlertException("A new userLocation cannot already have an ID", ENTITY_NAME, "idexists");
@@ -72,7 +73,7 @@ public class UserLocationResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/user-locations")
-    public ResponseEntity<UserLocationDTO> updateUserLocation(@RequestBody UserLocationDTO userLocationDTO) throws URISyntaxException {
+    public ResponseEntity<UserLocationDTO> updateUserLocation(@Valid @RequestBody UserLocationDTO userLocationDTO) throws URISyntaxException {
         log.debug("REST request to update UserLocation : {}", userLocationDTO);
         if (userLocationDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
@@ -93,6 +94,14 @@ public class UserLocationResource {
     public ResponseEntity<List<UserLocationDTO>> getAllUserLocations(Pageable pageable) {
         log.debug("REST request to get a page of UserLocations");
         Page<UserLocationDTO> page = userLocationService.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    @GetMapping("/user-locations/user/{userId}")
+    public ResponseEntity<List<UserLocationDTO>> getUserLocationsByUserId(String userId, Pageable pageable) {
+        log.debug("REST request to get a page of UserLocations");
+        Page<UserLocationDTO> page = userLocationService.findByUserId(userId, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

@@ -124,6 +124,42 @@ public class UserHealthStatusResourceIT {
 
 
     @Test
+    public void checkUserIdIsRequired() throws Exception {
+        int databaseSizeBeforeTest = userHealthStatusRepository.findAll().size();
+        // set the field null
+        userHealthStatus.setUserId(null);
+
+        // Create the UserHealthStatus, which fails.
+        UserHealthStatusDTO userHealthStatusDTO = userHealthStatusMapper.toDto(userHealthStatus);
+
+        restUserHealthStatusMockMvc.perform(post("/api/user-health-statuses")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(userHealthStatusDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<UserHealthStatus> userHealthStatusList = userHealthStatusRepository.findAll();
+        assertThat(userHealthStatusList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    public void checkSeverityIsRequired() throws Exception {
+        int databaseSizeBeforeTest = userHealthStatusRepository.findAll().size();
+        // set the field null
+        userHealthStatus.setSeverity(null);
+
+        // Create the UserHealthStatus, which fails.
+        UserHealthStatusDTO userHealthStatusDTO = userHealthStatusMapper.toDto(userHealthStatus);
+
+        restUserHealthStatusMockMvc.perform(post("/api/user-health-statuses")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(userHealthStatusDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<UserHealthStatus> userHealthStatusList = userHealthStatusRepository.findAll();
+        assertThat(userHealthStatusList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
     public void getAllUserHealthStatuses() throws Exception {
         // Initialize the database
         userHealthStatusRepository.save(userHealthStatus);

@@ -3,6 +3,7 @@ package com.yomo.covid.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -13,16 +14,18 @@ import com.yomo.covid.domain.enumeration.UserHealthSeverity;
  * A UserHealthStatus.
  */
 @Document(collection = "user_health_status")
-public class UserHealthStatus extends AbstractAuditingEntity implements Serializable {
+public class UserHealthStatus implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     private String id;
 
+    @NotNull
     @Field("user_id")
     private String userId;
 
+    @NotNull
     @Field("severity")
     private UserHealthSeverity severity;
 

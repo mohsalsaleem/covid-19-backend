@@ -123,6 +123,42 @@ public class UserCurrentLocationResourceIT {
 
 
     @Test
+    public void checkUserIdIsRequired() throws Exception {
+        int databaseSizeBeforeTest = userCurrentLocationRepository.findAll().size();
+        // set the field null
+        userCurrentLocation.setUserId(null);
+
+        // Create the UserCurrentLocation, which fails.
+        UserCurrentLocationDTO userCurrentLocationDTO = userCurrentLocationMapper.toDto(userCurrentLocation);
+
+        restUserCurrentLocationMockMvc.perform(post("/api/user-current-locations")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(userCurrentLocationDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<UserCurrentLocation> userCurrentLocationList = userCurrentLocationRepository.findAll();
+        assertThat(userCurrentLocationList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    public void checkLocationIdIsRequired() throws Exception {
+        int databaseSizeBeforeTest = userCurrentLocationRepository.findAll().size();
+        // set the field null
+        userCurrentLocation.setLocationId(null);
+
+        // Create the UserCurrentLocation, which fails.
+        UserCurrentLocationDTO userCurrentLocationDTO = userCurrentLocationMapper.toDto(userCurrentLocation);
+
+        restUserCurrentLocationMockMvc.perform(post("/api/user-current-locations")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(userCurrentLocationDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<UserCurrentLocation> userCurrentLocationList = userCurrentLocationRepository.findAll();
+        assertThat(userCurrentLocationList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
     public void getAllUserCurrentLocations() throws Exception {
         // Initialize the database
         userCurrentLocationRepository.save(userCurrentLocation);

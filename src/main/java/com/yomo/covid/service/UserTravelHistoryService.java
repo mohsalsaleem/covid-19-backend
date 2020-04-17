@@ -28,6 +28,8 @@ public interface UserTravelHistoryService {
      */
     Page<UserTravelHistoryDTO> findAll(Pageable pageable);
 
+    Page<UserTravelHistoryDTO> findByUserId(String userId, Pageable pageable);
+
     /**
      * Get the "id" userTravelHistory.
      *

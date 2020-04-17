@@ -123,6 +123,42 @@ public class UserSymptomResourceIT {
 
 
     @Test
+    public void checkUserIdIsRequired() throws Exception {
+        int databaseSizeBeforeTest = userSymptomRepository.findAll().size();
+        // set the field null
+        userSymptom.setUserId(null);
+
+        // Create the UserSymptom, which fails.
+        UserSymptomDTO userSymptomDTO = userSymptomMapper.toDto(userSymptom);
+
+        restUserSymptomMockMvc.perform(post("/api/user-symptoms")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(userSymptomDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<UserSymptom> userSymptomList = userSymptomRepository.findAll();
+        assertThat(userSymptomList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    public void checkSymptomIsRequired() throws Exception {
+        int databaseSizeBeforeTest = userSymptomRepository.findAll().size();
+        // set the field null
+        userSymptom.setSymptom(null);
+
+        // Create the UserSymptom, which fails.
+        UserSymptomDTO userSymptomDTO = userSymptomMapper.toDto(userSymptom);
+
+        restUserSymptomMockMvc.perform(post("/api/user-symptoms")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(userSymptomDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<UserSymptom> userSymptomList = userSymptomRepository.findAll();
+        assertThat(userSymptomList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
     public void getAllUserSymptoms() throws Exception {
         // Initialize the database
         userSymptomRepository.save(userSymptom);

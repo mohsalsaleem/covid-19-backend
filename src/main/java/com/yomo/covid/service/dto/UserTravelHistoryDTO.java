@@ -1,6 +1,7 @@
 package com.yomo.covid.service.dto;
 
 import java.time.Instant;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -8,20 +9,25 @@ import java.util.Objects;
  * A DTO for the {@link com.yomo.covid.domain.UserTravelHistory} entity.
  */
 public class UserTravelHistoryDTO implements Serializable {
-    
+
     private String id;
 
+    @NotNull
     private String userId;
 
+    @NotNull
     private String locationName;
 
+    @NotNull
     private Long latitude;
 
+    @NotNull
     private Long longitude;
 
+    @NotNull
     private Instant dateAndTimeOfTravel;
 
-    
+
     public String getId() {
         return id;
     }

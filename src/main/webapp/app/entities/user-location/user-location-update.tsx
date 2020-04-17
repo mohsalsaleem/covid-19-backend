@@ -79,25 +79,57 @@ export const UserLocationUpdate = (props: IUserLocationUpdateProps) => {
                 <Label id="userIdLabel" for="user-location-userId">
                   <Translate contentKey="covid19App.userLocation.userId">User Id</Translate>
                 </Label>
-                <AvField id="user-location-userId" type="text" name="userId" />
+                <AvField
+                  id="user-location-userId"
+                  type="text"
+                  name="userId"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') }
+                  }}
+                />
               </AvGroup>
               <AvGroup>
                 <Label id="latitudeLabel" for="user-location-latitude">
                   <Translate contentKey="covid19App.userLocation.latitude">Latitude</Translate>
                 </Label>
-                <AvField id="user-location-latitude" type="string" className="form-control" name="latitude" />
+                <AvField
+                  id="user-location-latitude"
+                  type="string"
+                  className="form-control"
+                  name="latitude"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') },
+                    number: { value: true, errorMessage: translate('entity.validation.number') }
+                  }}
+                />
               </AvGroup>
               <AvGroup>
                 <Label id="longitudeLabel" for="user-location-longitude">
                   <Translate contentKey="covid19App.userLocation.longitude">Longitude</Translate>
                 </Label>
-                <AvField id="user-location-longitude" type="string" className="form-control" name="longitude" />
+                <AvField
+                  id="user-location-longitude"
+                  type="string"
+                  className="form-control"
+                  name="longitude"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') },
+                    number: { value: true, errorMessage: translate('entity.validation.number') }
+                  }}
+                />
               </AvGroup>
               <AvGroup>
                 <Label id="locationNameLabel" for="user-location-locationName">
                   <Translate contentKey="covid19App.userLocation.locationName">Location Name</Translate>
                 </Label>
-                <AvField id="user-location-locationName" type="text" name="locationName" />
+                <AvField
+                  id="user-location-locationName"
+                  type="text"
+                  name="locationName"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') }
+                  }}
+                />
               </AvGroup>
               <Button tag={Link} id="cancel-save" to="/user-location" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />

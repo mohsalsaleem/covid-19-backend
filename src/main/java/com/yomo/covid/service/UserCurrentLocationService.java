@@ -1,5 +1,6 @@
 package com.yomo.covid.service;
 
+import com.yomo.covid.domain.UserCurrentLocation;
 import com.yomo.covid.service.dto.UserCurrentLocationDTO;
 
 import org.springframework.data.domain.Page;
@@ -42,4 +43,6 @@ public interface UserCurrentLocationService {
      * @param id the id of the entity.
      */
     void delete(String id);
+
+    Page<UserCurrentLocationDTO> findByUserId(String userId, Pageable pageable);
 }

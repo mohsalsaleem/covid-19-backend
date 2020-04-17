@@ -1,5 +1,6 @@
 package com.yomo.covid.service.impl;
 
+import com.yomo.covid.domain.Location;
 import com.yomo.covid.service.UserLocationService;
 import com.yomo.covid.domain.UserLocation;
 import com.yomo.covid.repository.UserLocationRepository;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 /**
@@ -41,6 +43,12 @@ public class UserLocationServiceImpl implements UserLocationService {
     public UserLocationDTO save(UserLocationDTO userLocationDTO) {
         log.debug("Request to save UserLocation : {}", userLocationDTO);
         UserLocation userLocation = userLocationMapper.toEntity(userLocationDTO);
+
+        Location location = new Location();
+        location.setCoordinates(Arrays.asList(userLocationDTO.getLatitude(), userLocationDTO.getLongitude()));
+        location.setType("Point");
+        userLocation.location = location;
+
         userLocation = userLocationRepository.save(userLocation);
         return userLocationMapper.toDto(userLocation);
     }
@@ -80,5 +88,10 @@ public class UserLocationServiceImpl implements UserLocationService {
     public void delete(String id) {
         log.debug("Request to delete UserLocation : {}", id);
         userLocationRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<UserLocationDTO> findByUserId(String userId, Pageable pageable) {
+        return userLocationRepository.findByUserId(userId, pageable).map(userLocationMapper::toDto);
     }
 }

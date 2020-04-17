@@ -42,4 +42,6 @@ public interface UserHealthStatusService {
      * @param id the id of the entity.
      */
     void delete(String id);
+
+    Page<UserHealthStatusDTO> findByUserId(String userId, Pageable pageable);
 }

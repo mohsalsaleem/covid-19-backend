@@ -81,25 +81,57 @@ export const UserTravelHistoryUpdate = (props: IUserTravelHistoryUpdateProps) =>
                 <Label id="userIdLabel" for="user-travel-history-userId">
                   <Translate contentKey="covid19App.userTravelHistory.userId">User Id</Translate>
                 </Label>
-                <AvField id="user-travel-history-userId" type="text" name="userId" />
+                <AvField
+                  id="user-travel-history-userId"
+                  type="text"
+                  name="userId"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') }
+                  }}
+                />
               </AvGroup>
               <AvGroup>
                 <Label id="locationNameLabel" for="user-travel-history-locationName">
                   <Translate contentKey="covid19App.userTravelHistory.locationName">Location Name</Translate>
                 </Label>
-                <AvField id="user-travel-history-locationName" type="text" name="locationName" />
+                <AvField
+                  id="user-travel-history-locationName"
+                  type="text"
+                  name="locationName"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') }
+                  }}
+                />
               </AvGroup>
               <AvGroup>
                 <Label id="latitudeLabel" for="user-travel-history-latitude">
                   <Translate contentKey="covid19App.userTravelHistory.latitude">Latitude</Translate>
                 </Label>
-                <AvField id="user-travel-history-latitude" type="string" className="form-control" name="latitude" />
+                <AvField
+                  id="user-travel-history-latitude"
+                  type="string"
+                  className="form-control"
+                  name="latitude"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') },
+                    number: { value: true, errorMessage: translate('entity.validation.number') }
+                  }}
+                />
               </AvGroup>
               <AvGroup>
                 <Label id="longitudeLabel" for="user-travel-history-longitude">
                   <Translate contentKey="covid19App.userTravelHistory.longitude">Longitude</Translate>
                 </Label>
-                <AvField id="user-travel-history-longitude" type="string" className="form-control" name="longitude" />
+                <AvField
+                  id="user-travel-history-longitude"
+                  type="string"
+                  className="form-control"
+                  name="longitude"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') },
+                    number: { value: true, errorMessage: translate('entity.validation.number') }
+                  }}
+                />
               </AvGroup>
               <AvGroup>
                 <Label id="dateAndTimeOfTravelLabel" for="user-travel-history-dateAndTimeOfTravel">
@@ -112,6 +144,9 @@ export const UserTravelHistoryUpdate = (props: IUserTravelHistoryUpdateProps) =>
                   name="dateAndTimeOfTravel"
                   placeholder={'YYYY-MM-DD HH:mm'}
                   value={isNew ? displayDefaultDateTime() : convertDateTimeFromServer(props.userTravelHistoryEntity.dateAndTimeOfTravel)}
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') }
+                  }}
                 />
               </AvGroup>
               <Button tag={Link} id="cancel-save" to="/user-travel-history" replace color="info">

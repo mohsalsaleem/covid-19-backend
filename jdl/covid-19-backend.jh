@@ -1,13 +1,13 @@
 entity UserCurrentLocation {
-	userId String,
-	locationId String
+	userId String required,
+	locationId String required
 }
 
 entity UserLocation {
-	userId String,
-	latitude Long,
-    longitude Long,
-    locationName String
+	userId String required,
+	latitude Long required,
+    longitude Long required,
+    locationName String required
 }
 
 enum UserHealthSeverity {
@@ -18,21 +18,21 @@ enum UserHealthSeverity {
 }
 
 entity UserHealthStatus {
-	userId String,
-    severity UserHealthSeverity
+	userId String required,
+    severity UserHealthSeverity required
 }
 
 entity UserSymptom {
-	userId String,
-	symptom String
+	userId String required,
+	symptom String required
 }
 
 entity UserTravelHistory {
-	userId String,
-	locationName String,
-    latitude Long,
-    longitude Long,
-    dateAndTimeOfTravel Instant
+	userId String required,
+	locationName String required,
+    latitude Long required,
+    longitude Long required,
+    dateAndTimeOfTravel Instant required
 }
 
 paginate * with pagination

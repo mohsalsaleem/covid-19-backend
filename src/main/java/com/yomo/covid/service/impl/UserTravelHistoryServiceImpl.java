@@ -1,5 +1,6 @@
 package com.yomo.covid.service.impl;
 
+import com.yomo.covid.domain.Location;
 import com.yomo.covid.service.UserTravelHistoryService;
 import com.yomo.covid.domain.UserTravelHistory;
 import com.yomo.covid.repository.UserTravelHistoryRepository;
@@ -12,6 +13,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Optional;
 
 /**
@@ -41,6 +44,12 @@ public class UserTravelHistoryServiceImpl implements UserTravelHistoryService {
     public UserTravelHistoryDTO save(UserTravelHistoryDTO userTravelHistoryDTO) {
         log.debug("Request to save UserTravelHistory : {}", userTravelHistoryDTO);
         UserTravelHistory userTravelHistory = userTravelHistoryMapper.toEntity(userTravelHistoryDTO);
+
+        Location location = new Location();
+        location.setCoordinates(Arrays.asList(userTravelHistoryDTO.getLatitude(), userTravelHistoryDTO.getLongitude()));
+        location.setType("Point");
+        userTravelHistory.location = location;
+
         userTravelHistory = userTravelHistoryRepository.save(userTravelHistory);
         return userTravelHistoryMapper.toDto(userTravelHistory);
     }
@@ -80,5 +89,11 @@ public class UserTravelHistoryServiceImpl implements UserTravelHistoryService {
     public void delete(String id) {
         log.debug("Request to delete UserTravelHistory : {}", id);
         userTravelHistoryRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<UserTravelHistoryDTO> findByUserId(String userId, Pageable pageable) {
+        log.debug("Request to get UserTravelHistory by userId: {}", userId);
+        return userTravelHistoryRepository.findByUserId(userId, pageable).map(userTravelHistoryMapper::toDto);
     }
 }

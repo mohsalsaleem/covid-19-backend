@@ -18,6 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -51,7 +52,7 @@ public class UserTravelHistoryResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/user-travel-histories")
-    public ResponseEntity<UserTravelHistoryDTO> createUserTravelHistory(@RequestBody UserTravelHistoryDTO userTravelHistoryDTO) throws URISyntaxException {
+    public ResponseEntity<UserTravelHistoryDTO> createUserTravelHistory(@Valid @RequestBody UserTravelHistoryDTO userTravelHistoryDTO) throws URISyntaxException {
         log.debug("REST request to save UserTravelHistory : {}", userTravelHistoryDTO);
         if (userTravelHistoryDTO.getId() != null) {
             throw new BadRequestAlertException("A new userTravelHistory cannot already have an ID", ENTITY_NAME, "idexists");
@@ -72,7 +73,7 @@ public class UserTravelHistoryResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/user-travel-histories")
-    public ResponseEntity<UserTravelHistoryDTO> updateUserTravelHistory(@RequestBody UserTravelHistoryDTO userTravelHistoryDTO) throws URISyntaxException {
+    public ResponseEntity<UserTravelHistoryDTO> updateUserTravelHistory(@Valid @RequestBody UserTravelHistoryDTO userTravelHistoryDTO) throws URISyntaxException {
         log.debug("REST request to update UserTravelHistory : {}", userTravelHistoryDTO);
         if (userTravelHistoryDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
@@ -93,6 +94,20 @@ public class UserTravelHistoryResource {
     public ResponseEntity<List<UserTravelHistoryDTO>> getAllUserTravelHistories(Pageable pageable) {
         log.debug("REST request to get a page of UserTravelHistories");
         Page<UserTravelHistoryDTO> page = userTravelHistoryService.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+     * {@code GET  /user-travel-histories} : get all the userTravelHistories.
+     *
+     * @param pageable the pagination information.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of userTravelHistories in body.
+     */
+    @GetMapping("/user-travel-histories/user/{userId}")
+    public ResponseEntity<List<UserTravelHistoryDTO>> getUserTravelHistoriesByUserId(@RequestParam String userId, Pageable pageable) {
+        log.debug("REST request to get a page of UserTravelHistories");
+        Page<UserTravelHistoryDTO> page = userTravelHistoryService.findByUserId(userId, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
