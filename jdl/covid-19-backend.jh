@@ -1,0 +1,42 @@
+entity UserCurrentLocation {
+	userId String,
+	locationId String
+}
+
+entity UserLocation {
+	userId String,
+	latitude Long,
+    longitude Long,
+    locationName String
+}
+
+enum UserHealthSeverity {
+	NONE,
+	LOW,
+	MEDIUM,
+	HIGH
+}
+
+entity UserHealthStatus {
+	userId String,
+    severity UserHealthSeverity
+}
+
+entity UserSymptom {
+	userId String,
+	symptom String
+}
+
+entity UserTravelHistory {
+	userId String,
+	locationName String,
+    latitude Long,
+    longitude Long,
+    dateAndTimeOfTravel Instant
+}
+
+paginate * with pagination
+
+service * with serviceImpl
+
+dto * with mapstruct
