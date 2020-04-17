@@ -1,0 +1,23 @@
+{
+  "covid19App": {
+    "userCurrentLocation": {
+      "home": {
+        "title": "UserCurrentLocations",
+        "createLabel": "नया User Current Location बनाएँ",
+        "createOrEditLabel": "User Current Location बनाएँ या संपादित करें",
+        "notFound": "No User Current Locations found"
+      },
+      "created": "एक नया User Current Location [identifier: {{ param }}] तैयार है",
+      "updated": "एक User Current Location [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "User Current Location [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "User Current Location [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "User Current Location"
+      },
+      "userId": "User Id",
+      "locationId": "Location Id"
+    }
+  }
+}

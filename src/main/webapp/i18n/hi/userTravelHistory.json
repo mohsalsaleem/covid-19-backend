@@ -1,0 +1,26 @@
+{
+  "covid19App": {
+    "userTravelHistory": {
+      "home": {
+        "title": "UserTravelHistories",
+        "createLabel": "नया User Travel History बनाएँ",
+        "createOrEditLabel": "User Travel History बनाएँ या संपादित करें",
+        "notFound": "No User Travel Histories found"
+      },
+      "created": "एक नया User Travel History [identifier: {{ param }}] तैयार है",
+      "updated": "एक User Travel History [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "User Travel History [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "User Travel History [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "User Travel History"
+      },
+      "userId": "User Id",
+      "locationName": "Location Name",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "dateAndTimeOfTravel": "Date And Time Of Travel"
+    }
+  }
+}

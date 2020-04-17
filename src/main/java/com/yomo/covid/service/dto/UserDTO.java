@@ -32,6 +32,9 @@ public class UserDTO {
     @Size(min = 5, max = 254)
     private String email;
 
+    @Size(min = 10)
+    private String phone;
+
     @Size(max = 256)
     private String imageUrl;
 
@@ -60,6 +63,7 @@ public class UserDTO {
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.email = user.getEmail();
+        this.phone = user.getPhone();
         this.activated = user.getActivated();
         this.imageUrl = user.getImageUrl();
         this.langKey = user.getLangKey();

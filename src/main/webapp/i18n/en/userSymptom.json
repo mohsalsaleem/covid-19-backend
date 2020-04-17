@@ -1,0 +1,23 @@
+{
+  "covid19App": {
+    "userSymptom": {
+      "home": {
+        "title": "User Symptoms",
+        "createLabel": "Create a new User Symptom",
+        "createOrEditLabel": "Create or edit a User Symptom",
+        "notFound": "No User Symptoms found"
+      },
+      "created": "A new User Symptom is created with identifier {{ param }}",
+      "updated": "A User Symptom is updated with identifier {{ param }}",
+      "deleted": "A User Symptom is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete User Symptom {{ id }}?"
+      },
+      "detail": {
+        "title": "User Symptom"
+      },
+      "userId": "User Id",
+      "symptom": "Symptom"
+    }
+  }
+}

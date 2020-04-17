@@ -1,0 +1,26 @@
+{
+  "covid19App": {
+    "userTravelHistory": {
+      "home": {
+        "title": "User Travel Histories",
+        "createLabel": "Create a new User Travel History",
+        "createOrEditLabel": "Create or edit a User Travel History",
+        "notFound": "No User Travel Histories found"
+      },
+      "created": "A new User Travel History is created with identifier {{ param }}",
+      "updated": "A User Travel History is updated with identifier {{ param }}",
+      "deleted": "A User Travel History is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete User Travel History {{ id }}?"
+      },
+      "detail": {
+        "title": "User Travel History"
+      },
+      "userId": "User Id",
+      "locationName": "Location Name",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "dateAndTimeOfTravel": "Date And Time Of Travel"
+    }
+  }
+}

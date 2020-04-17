@@ -1,0 +1,23 @@
+{
+  "covid19App": {
+    "userHealthStatus": {
+      "home": {
+        "title": "User Health Statuses",
+        "createLabel": "Create a new User Health Status",
+        "createOrEditLabel": "Create or edit a User Health Status",
+        "notFound": "No User Health Statuses found"
+      },
+      "created": "A new User Health Status is created with identifier {{ param }}",
+      "updated": "A User Health Status is updated with identifier {{ param }}",
+      "deleted": "A User Health Status is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete User Health Status {{ id }}?"
+      },
+      "detail": {
+        "title": "User Health Status"
+      },
+      "userId": "User Id",
+      "severity": "Severity"
+    }
+  }
+}

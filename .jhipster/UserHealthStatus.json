@@ -1,0 +1,26 @@
+{
+    "name": "UserHealthStatus",
+    "fields": [
+        {
+            "fieldName": "userId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "severity",
+            "fieldType": "UserHealthSeverity",
+            "fieldValues": "NONE,LOW,MEDIUM,HIGH"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20200417044600",
+    "entityTableName": "user_health_status",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

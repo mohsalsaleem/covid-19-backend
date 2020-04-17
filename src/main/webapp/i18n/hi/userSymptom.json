@@ -1,0 +1,23 @@
+{
+  "covid19App": {
+    "userSymptom": {
+      "home": {
+        "title": "UserSymptoms",
+        "createLabel": "नया User Symptom बनाएँ",
+        "createOrEditLabel": "User Symptom बनाएँ या संपादित करें",
+        "notFound": "No User Symptoms found"
+      },
+      "created": "एक नया User Symptom [identifier: {{ param }}] तैयार है",
+      "updated": "एक User Symptom [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "User Symptom [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "User Symptom [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "User Symptom"
+      },
+      "userId": "User Id",
+      "symptom": "Symptom"
+    }
+  }
+}

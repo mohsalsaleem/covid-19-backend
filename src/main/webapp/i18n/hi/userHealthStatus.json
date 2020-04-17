@@ -1,0 +1,23 @@
+{
+  "covid19App": {
+    "userHealthStatus": {
+      "home": {
+        "title": "UserHealthStatuses",
+        "createLabel": "नया User Health Status बनाएँ",
+        "createOrEditLabel": "User Health Status बनाएँ या संपादित करें",
+        "notFound": "No User Health Statuses found"
+      },
+      "created": "एक नया User Health Status [identifier: {{ param }}] तैयार है",
+      "updated": "एक User Health Status [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "User Health Status [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "User Health Status [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "User Health Status"
+      },
+      "userId": "User Id",
+      "severity": "Severity"
+    }
+  }
+}

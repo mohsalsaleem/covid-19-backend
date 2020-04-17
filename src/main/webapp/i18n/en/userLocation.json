@@ -1,0 +1,25 @@
+{
+  "covid19App": {
+    "userLocation": {
+      "home": {
+        "title": "User Locations",
+        "createLabel": "Create a new User Location",
+        "createOrEditLabel": "Create or edit a User Location",
+        "notFound": "No User Locations found"
+      },
+      "created": "A new User Location is created with identifier {{ param }}",
+      "updated": "A User Location is updated with identifier {{ param }}",
+      "deleted": "A User Location is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete User Location {{ id }}?"
+      },
+      "detail": {
+        "title": "User Location"
+      },
+      "userId": "User Id",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "locationName": "Location Name"
+    }
+  }
+}

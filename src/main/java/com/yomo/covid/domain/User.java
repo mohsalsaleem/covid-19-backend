@@ -55,6 +55,10 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     private boolean activated = false;
 
+    @Size(min = 10)
+    @Field("phone")
+    private String phone;
+
     @Size(min = 2, max = 10)
     @Field("lang_key")
     private String langKey;
@@ -183,6 +187,14 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     @Override
