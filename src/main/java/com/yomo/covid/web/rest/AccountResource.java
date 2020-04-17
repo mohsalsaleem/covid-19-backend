@@ -15,7 +15,9 @@ import com.yomo.covid.web.rest.vm.ManagedUserVM;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -105,6 +107,12 @@ public class AccountResource {
         return userService.getUserWithAuthorities()
             .map(UserDTO::new)
             .orElseThrow(() -> new AccountResourceException("User could not be found"));
+    }
+
+    @GetMapping("/account/search")
+    public ResponseEntity<List<UserDTO>> searchAccount(@RequestParam String query) {
+        List<UserDTO> userDTOS = userService.search(query);
+        return ResponseEntity.ok(userDTOS);
     }
 
     /**
