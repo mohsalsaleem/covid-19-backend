@@ -38,4 +38,8 @@ public interface UserRepository extends MongoRepository<User, String> {
     List<User> findTop50ByFirstNameIgnoreCaseContainingOrLastNameIgnoreCaseContaining(String firstName, String lastName);
 
     Page<User> findAllByLoginNot(Pageable pageable, String login);
+
+    List<User> findByIdInAndAgeBetween(List<String> id, Integer ageGT, Integer ageLT);
+
+    List<User> findByIdIn(List<String> id);
 }

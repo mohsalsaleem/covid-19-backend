@@ -15,4 +15,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserLocationRepository extends MongoRepository<UserLocation, String> {
     Page<UserLocation> findByUserId(String userId, Pageable pageable);
+
 }

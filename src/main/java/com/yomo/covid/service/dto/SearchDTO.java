@@ -1,5 +1,6 @@
 package com.yomo.covid.service.dto;
 
+import com.yomo.covid.domain.UserHealthStatus;
 import com.yomo.covid.domain.UserTravelHistory;
 import com.yomo.covid.domain.enumeration.UserHealthSeverity;
 
@@ -19,9 +20,7 @@ public class SearchDTO implements Serializable {
 
     private AgeGroup ageGroup;
 
-    private List<UserDTO> contactWithUsers;
-
-    private List<UserTravelHistoryDTO> userTravelHistoryDTOS;
+    private String locationName;
 
     public Set<UserHealthSeverity> getUserHealthSeveritySet() {
         return userHealthSeveritySet;
@@ -39,25 +38,12 @@ public class SearchDTO implements Serializable {
         this.ageGroup = ageGroup;
     }
 
-    public List<UserDTO> getContactWithUsers() {
-        return contactWithUsers;
+    public String getLocationName() {
+        return locationName;
     }
 
-    public void setContactWithUsers(List<UserDTO> contactWithUsers) {
-        this.contactWithUsers = contactWithUsers;
-    }
-
-    public List<UserTravelHistoryDTO> getUserTravelHistoryDTOS() {
-        return userTravelHistoryDTOS;
-    }
-
-    public void setUserTravelHistoryDTOS(List<UserTravelHistoryDTO> userTravelHistoryDTOS) {
-        this.userTravelHistoryDTOS = userTravelHistoryDTOS;
-    }
-
-    public class AgeGroup {
-        public Integer fromAge;
-        public Integer toAge;
+    public void setLocationName(String locationName) {
+        this.locationName = locationName;
     }
 
 }
