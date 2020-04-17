@@ -2,6 +2,7 @@ package com.yomo.covid.web.rest;
 
 import com.yomo.covid.domain.User;
 import com.yomo.covid.repository.UserRepository;
+import com.yomo.covid.security.AuthoritiesConstants;
 import com.yomo.covid.security.SecurityUtils;
 import com.yomo.covid.service.MailService;
 import com.yomo.covid.service.UserService;
@@ -57,13 +58,13 @@ public class AccountResource {
      * @throws EmailAlreadyUsedException {@code 400 (Bad Request)} if the email is already used.
      * @throws LoginAlreadyUsedException {@code 400 (Bad Request)} if the login is already used.
      */
-    @PostMapping("/register")
+    @PostMapping("/patient/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public void registerAccount(@Valid @RequestBody ManagedUserVM managedUserVM) {
+    public void registerPatientAccount(@Valid @RequestBody ManagedUserVM managedUserVM) {
         if (!checkPasswordLength(managedUserVM.getPassword())) {
             throw new InvalidPasswordException();
         }
-        User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
+        User user = userService.registerUser(managedUserVM, managedUserVM.getPassword(), AuthoritiesConstants.PATIENT);
         mailService.sendActivationEmail(user);
     }
 
